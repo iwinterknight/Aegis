@@ -1,2 +1,2 @@
 # Aegis
-Merger and Acquisition Agent
+Corporate Finance Event Intelligence Platform
