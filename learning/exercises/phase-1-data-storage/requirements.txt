@@ -1,0 +1,2 @@
+# Phase 1 exercise dependencies. Exercises 01 are stdlib-only; 02+ add Faker.
+faker>=25
