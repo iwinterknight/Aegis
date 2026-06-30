@@ -52,7 +52,15 @@ SQLite → PostgreSQL).
 Local dev: laptop **RTX 3080 Ti, 16 GB** (Ampere). Heavy ML: **Google Colab A100**. Scale demos to fit
 the laptop but always teach the production-scale mechanism and say when something is scaled down.
 
-## Resuming on another machine
+## Multi-machine work (CRITICAL)
 
-`git clone` → read `docs/PROJECT_STATE.md` → continue. The live conversation transcript itself does not
-sync via git (it lives in `~/.claude/projects/…`); this file + `docs/` carry the context instead.
+This project is developed across two machines. **One-time per machine after cloning:** run
+`sh scripts/setup-sync.sh` (or `./scripts/setup-sync.ps1`) to enable the sync hooks. After that,
+**every commit automatically includes the SDD files AND the Claude Code conversation thread**
+(`conversations/*.jsonl`), and `git pull` restores the thread into `~/.claude/`. Full spec:
+[`docs/MULTI_MACHINE_SYNC.md`](docs/MULTI_MACHINE_SYNC.md).
+
+Daily rule: **`git pull` when starting, `git push` before stopping** — and push before switching
+machines so the latest thread snapshot is captured. Resume by reading `docs/PROJECT_STATE.md`
+(this `CLAUDE.md` auto-loads the project brain); the literal transcript is restored by the hooks but
+context comes from these committed docs.

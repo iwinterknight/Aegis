@@ -1,0 +1,5 @@
+#!/bin/sh
+# Runs after clone/checkout; reuse the RESTORE logic so a fresh clone repopulates ~/.claude.
+DIR="$(dirname "$0")"
+sh "$DIR/post-merge" >/dev/null 2>&1 || true
+exit 0

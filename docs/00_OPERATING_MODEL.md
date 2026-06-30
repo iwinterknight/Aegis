@@ -55,6 +55,10 @@ We do not start ④ until the developer signals they're clear on ①–③.
 - **Living spec:** `docs/specs/Project_Aegis_System_Specification.md` is the source of truth.
   Design refinements from discussion are committed there as reviewable diffs (the `.docx` is the
   original seed, kept for reference).
+- **Multi-machine sync (binding):** development spans two machines. Run `scripts/setup-sync.*` once
+  per machine; thereafter every commit auto-includes the SDD files **and** the Claude Code
+  conversation thread (`conversations/`). Pull when starting, push before stopping/switching. Full
+  detail: `docs/MULTI_MACHINE_SYNC.md`.
 
 ## Repository layout
 

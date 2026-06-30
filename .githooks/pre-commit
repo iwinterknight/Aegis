@@ -1,0 +1,18 @@
+#!/bin/sh
+# Aegis multi-machine sync (CAPTURE). Copies this project's Claude Code transcripts into the
+# repo's conversations/ folder and stages them, so every commit includes the </> Code thread.
+# Must NEVER block a commit -> every failure path exits 0.
+REPO="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+[ -n "$REPO" ] || exit 0
+# Claude Code names a project's dir by replacing : / \ in its absolute path with -
+SLUG="$(printf '%s' "$REPO" | sed 's#[:/\\]#-#g')"
+SRC="$HOME/.claude/projects/$SLUG"
+DEST="$REPO/conversations"
+[ -d "$SRC" ] || exit 0
+mkdir -p "$DEST"
+for f in "$SRC"/*.jsonl; do
+  [ -e "$f" ] || continue
+  cp -f "$f" "$DEST/$(basename "$f")" 2>/dev/null || true
+done
+git add "$DEST" 2>/dev/null || true
+exit 0

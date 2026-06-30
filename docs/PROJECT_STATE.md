@@ -35,9 +35,13 @@ for the running discussion log.
 
 ```bash
 git clone https://github.com/iwinterknight/Aegis.git && cd Aegis
+sh scripts/setup-sync.sh                              # ONCE per machine: enable thread sync hooks
 python -m venv .venv && . .venv/Scripts/activate      # Windows; use bin/activate on macOS/Linux
 pip install -r learning/exercises/phase-1-data-storage/requirements.txt   # currently just: faker
 ```
+
+**Multi-machine:** `git pull` when starting, `git push` before stopping/switching machines. Every
+commit auto-includes the SDD files and the Claude Code thread. See [`MULTI_MACHINE_SYNC.md`](MULTI_MACHINE_SYNC.md).
 Exercise 01 is stdlib-only; 02–04 need Faker. SEC calls need internet (offline fallbacks included).
 
 - **Compute:** local dev = laptop RTX 3080 Ti (16 GB, Ampere); heavy ML work = Google Colab A100.

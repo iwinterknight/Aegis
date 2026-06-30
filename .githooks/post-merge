@@ -1,0 +1,17 @@
+#!/bin/sh
+# Aegis multi-machine sync (RESTORE). After a pull, copies transcripts from the repo's
+# conversations/ back into this machine's ~/.claude so Claude Code can see/resume them.
+# Copies only files that are MISSING locally, so it never clobbers a live local transcript.
+REPO="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+[ -n "$REPO" ] || exit 0
+SLUG="$(printf '%s' "$REPO" | sed 's#[:/\\]#-#g')"
+SRC="$REPO/conversations"
+DEST="$HOME/.claude/projects/$SLUG"
+[ -d "$SRC" ] || exit 0
+mkdir -p "$DEST"
+for f in "$SRC"/*.jsonl; do
+  [ -e "$f" ] || continue
+  b="$(basename "$f")"
+  [ -e "$DEST/$b" ] || cp -f "$f" "$DEST/$b" 2>/dev/null || true
+done
+exit 0
