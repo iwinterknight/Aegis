@@ -25,8 +25,11 @@ commit/push only when asked. Full detail in [`00_OPERATING_MODEL.md`](00_OPERATI
   verified green. They cover: SEC `companyfacts` claims pull → anchored Faker ledger + seeded
   discrepancy → SQLite evidence store + parameterized SQL (injection demo) → the `SourceConnector`
   contract. (SG-1 — seeded-discrepancy detection — works end-to-end in the exercises.)
-- **Next:** ③ Phase 1 checkpoint quiz → commit → ④ build the real `src/` package (turn the notebook
-  functions into tested modules; swap SQLite → PostgreSQL).
+- **Next (RESUME HERE — Sunit switching machines):** Sunit has done exercises 01–03 hands-on; he will
+  **attempt Exercise 04 on the other machine**. Then: write the **Phase 1 checkpoint quiz** (not yet
+  authored), then ④ build the real `src/` package (notebook functions → tested modules; SQLite →
+  PostgreSQL), then ⑤ the Phase 1 build summary.
+- On resume: greet, confirm how Exercise 04 went, then offer to write the checkpoint quiz.
 
 See [`BUILD_LOG.md`](BUILD_LOG.md) for the full chronology and [`discussion-notes/phase-1-data-storage.md`](discussion-notes/phase-1-data-storage.md)
 for the running discussion log.
