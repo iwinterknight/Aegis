@@ -1,0 +1,14 @@
+# Project Aegis — Build Log
+
+Chronological record of what was built/decided and why, tied to commits and FR-IDs.
+
+| Date | Phase | What happened | Refs |
+|---|---|---|---|
+| 2026-06-26 | 0 — Setup | Read & absorbed spec v4.3. Agreed operating model (5-phase learning loop). Converted spec `.docx` → versioned Markdown. Scaffolded repo. Compute confirmed: RTX 3080 Ti Laptop 16 GB + Colab A100. Sequence: spec-roadmap order (data first). | `docs/00_OPERATING_MODEL.md` |
+| 2026-06-26 | 0 — Setup | Built self-documenting directory tree: `docs/{specs,primers,discussion-notes,build-summaries,adr,reference}` + `learning/{exercises,quizzes,solutions}/phase-1-data-storage`. README per directory; ADR template seeded; moved `.docx` seed into `docs/specs/`. Started live Phase 1 discussion log. | `docs/README.md`, `learning/README.md` |
+| 2026-06-27 | 1 — Deep dive | Financial-domain deep dive (primer written). Drove the data discussion to decisions: structured-first XBRL, SourceConnector/descriptor contract, anchored-synthetic ledger; liveness deferred. | `docs/primers/financial-domain-ma-due-diligence.md` |
+| 2026-06-27 | 1 — SDD lock | **ADR-0001** accepted. Spec → v4.4: refined FR-IN-1..3, added FR-IN-4..5, rewrote §10.3 (SourceConnector contract + structured/document paths), added v4.4 revision note. | `docs/adr/0001-…md`, `docs/specs/…md` |
+| 2026-06-27 | 1 — Exercise ② | Exercise 01 (SEC `companyfacts` pull) authored + solution verified live: JPM Liabilities $4.06T as of 2025-12-31. Stdlib-only, grounds the `sec-xbrl` connector. | `learning/exercises/phase-1-data-storage/01_*.ipynb` |
+| 2026-06-27 | 1 — Exercise ② | Exercise 02 (anchored Faker ledger + seeded discrepancy + reconciliation) authored + solution verified green: clean→MATCH, discrepant→$125M DISCREPANCY. Teaches Decimal-for-money, exact-sum generation, seeded determinism (NFR-CORR-1). SG-1 in miniature. | `…/02_faker_seeded_ledger.ipynb` |
+| 2026-06-27 | 1 — Exercise ② | Exercise 03 (DB evidence store + parameterized SQL reconciliation) authored + solution verified green. SQLite stand-in for Postgres (no PG installed); teaches schema-as-evidence-store, integer-cents money, and a live SQL-injection demo (unsafe leaks full total, parameterized returns $0) → motivates FR-MCP-1. | `…/03_postgres_evidence_store.ipynb` |
+| 2026-06-27 | 1 — Exercise ② | Exercise 04 (SourceConnector contract — capstone) authored + solution verified green: SG-1 runs through one `ingest()`, new `ffiec-callreport` source added in ~6 lines, reproducible-from-descriptor, unknown-source fails loud. Phase 1 exercise set complete (01–04). [FR-IN-4/5] | `…/04_source_connector_contract.ipynb` |
