@@ -1,0 +1,42 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+.python-version
+
+# ---- Jupyter / Anaconda noise ----
+.ipynb_checkpoints/
+.virtual_documents/
+anaconda_projects/
+*.ipynb_checkpoints
+
+# ---- Local databases / data artifacts ----
+*.db
+*.sqlite
+*.sqlite3
+data/local/
+*.parquet
+
+# ---- Secrets / env ----
+.env
+.env.*
+!.env.example
+*.key
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
