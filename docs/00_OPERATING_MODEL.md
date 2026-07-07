@@ -45,6 +45,56 @@ Every technical module runs this loop. Artifacts in **bold**.
 
 We do not start ④ until the developer signals they're clear on ①–③.
 
+## The Glass-Box Build protocol (binding — governs step ④)
+
+**Why:** the failure mode of AI-assisted coding is *black-box* code — the agent emits something
+plausible, the owner nods along, and later can't defend a design choice in their own repo. Aegis
+rejects that. Every unit of `src/` is built **glass-box**: the developer sees the concept, sees the
+writing, reads it back, and must **command** it (explain, modify, defend) before we advance. This
+protocol is binding on **both machines** — Claude runs it identically everywhere this repo is cloned.
+
+**Granularity — the "teachable unit."** The smallest coherent thing worth its own concept: one
+Pydantic model cluster, one connector class, one repository/DAO boundary, one query-safety layer.
+Roughly one class or function-family (~30–120 lines). Not per-line (too slow to retain), not
+per-module (too coarse to command). Step ④ proceeds one teachable unit at a time.
+
+**Per-unit micro-loop — four beats:**
+
+1. **① Concept Brief (before code).** Start **simple, then build complexity** — intuition first,
+   *then* the real mechanism **with a figure**, then the tie to fundamentals (which AI/ML or SWE
+   concept this unit embodies — e.g. "this is the *Data Access Object* low-level-design pattern").
+   Ends with the spec trace (FR/NFR/P IDs) + governing ADR, and an **LLD sketch** (interfaces, data
+   shapes, control flow) *before* any syntax. Lives in / extends `docs/primers/`.
+2. **② Build Narration (as code is written).** State a **plan of record** (files, functions, order,
+   decisions being locked); as code lands, log *what / why / rejected-alternative*, traced to IDs.
+   This is the "report the code-writing process" requirement. Lives in `docs/BUILD_LOG.md`.
+3. **③ Interactive Code Walkthrough (after code) — the core discipline.** Claude walks the developer
+   through the real code **by pointing to one part at a time**, and for each part explains it
+   **top-down: objective → functional → syntax** (per the Reporting Standard below). After the
+   syntax-level explanation of a part, Claude **stops and takes the developer's questions about that
+   part's syntax, and does not advance to the next part until the developer says to move on.** LLD
+   decisions are named explicitly (why this class boundary / signature / data structure / composition
+   vs inheritance) because that is the developer's stated weak spot, and each is re-connected to the
+   figure from beat ①. Folded into `docs/build-summaries/` at module end.
+4. **④ Command Gate (before advancing).** Active recall on the *real* code — predict-the-output /
+   spot-the-bug / extend-a-slice. **Intensity: hands-on** (developer writes/extends a real slice) for
+   any unit touching LLD or a core AI/ML concept; **lightweight** (2–3 recall questions) for
+   boilerplate. Passing the gate unlocks the next unit; stumbling loops us back to the weakest beat.
+   Reuses the `learning/exercises/` + `learning/solutions/` gap format, applied to real `src/`.
+
+**Figures (encouraged).** Inline ASCII for quick structural sketches; a self-contained **HTML
+Artifact** for richer diagrams (data-flow, radix-tree KV-cache, agent graphs) the developer can open,
+zoom, and share.
+
+This protocol is a *teaching overlay* on SDD, not a parallel process — it reuses existing artifacts
+(`primers/`, `BUILD_LOG.md`, `build-summaries/`, `exercises/`+`solutions/`). It nests inside step ④:
+
+```
+per-module loop:  ① Deep Dive → ② Exercises → ③ Quiz → ④ BUILD → ⑤ Summary
+                                                        └─ Glass-Box micro-loop
+                                                           runs once per teachable unit
+```
+
 ## Assessment ladder
 
 Objective, principles-first (never jargon), same MCQ format throughout (`learning/quizzes/README.md`):

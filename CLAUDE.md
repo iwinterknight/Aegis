@@ -27,6 +27,15 @@ Build** (`src/`) → **⑤ Build Summary** (`docs/build-summaries/`).
 
 **Do not start ④ (build) until Sunit signals he's clear on ①–③.**
 
+**Glass-Box Build (binding — governs step ④, full detail in `docs/00_OPERATING_MODEL.md`).** No
+black-box code: Sunit must be able to *command* every unit of `src/`. Build one **teachable unit**
+(~one class/function-family) at a time through a 4-beat micro-loop: **① Concept Brief** (simple →
+complex, with a **figure**, tie to fundamentals + LLD sketch, before code) → **② Build Narration**
+(plan of record + what/why/rejected, in `BUILD_LOG.md`) → **③ Interactive Code Walkthrough** — point
+to **one part at a time**, explain each **objective → functional → syntax**, then **stop and take
+Sunit's syntax questions, advancing only when he says move on** → **④ Command Gate** (active recall;
+hands-on for LLD/AI-ML units, lightweight for boilerplate). Figures via inline ASCII or HTML Artifact.
+
 ## Discipline (binding)
 
 - **SDD:** the spec is the source of truth; code/plans/tasks/tests trace to FR/NFR/P IDs.

@@ -21,17 +21,19 @@ commit/push only when asked. Full detail in [`00_OPERATING_MODEL.md`](00_OPERATI
 - **Phase 1 — Data & Storage.** Deep dives done: SDD methodology, financial domain. Data architecture
   decided in **[ADR-0001](adr/0001-structured-first-ingestion-and-source-connectors.md)** (structured-first
   XBRL + `SourceConnector` contract + anchored-synthetic ledger); spec is at **v4.4**.
-- **Loop step ② complete:** Phase 1 exercises **01–04** authored, with reference solutions, all
-  verified green. They cover: SEC `companyfacts` claims pull → anchored Faker ledger + seeded
-  discrepancy → SQLite evidence store + parameterized SQL (injection demo) → the `SourceConnector`
-  contract. (SG-1 — seeded-discrepancy detection — works end-to-end in the exercises.)
-- **Next (RESUME HERE):** All Phase 1 exercises **01–04 are complete hands-on** — the whole data arc
-  (XBRL claims → anchored ledger + seeded discrepancy → SQLite evidence store + parameterized SQL →
-  SourceConnector contract), SG-1 working end-to-end. Next in the loop: **③ write the Phase 1
-  checkpoint quiz** (`learning/quizzes/phase-1-data-storage/`), then **④ build the real `src/`**
-  (notebook functions → tested modules; SQLite → PostgreSQL; adopt **Pydantic v2** per WI-1/ADR-0002),
-  then **⑤ the Phase 1 build summary**.
-- On resume: greet, then offer to write the Phase 1 checkpoint quiz. Check `docs/BACKLOG.md` for the
+- **Loop steps ②–③ complete:** Phase 1 exercises **01–04** authored, with reference solutions, all
+  verified green (SEC `companyfacts` claims pull → anchored Faker ledger + seeded discrepancy → SQLite
+  evidence store + parameterized SQL injection demo → the `SourceConnector` contract; SG-1 works
+  end-to-end). The **③ checkpoint quiz** is written (`learning/quizzes/phase-1-data-storage/`). The
+  **assessment ladder** (midterm WI-11, final exam WI-12) is captured in the operating model.
+- **Glass-Box Build protocol adopted** (binding, in `00_OPERATING_MODEL.md` + `CLAUDE.md`): step ④ is
+  built one *teachable unit* at a time through Concept Brief → Build Narration → **interactive**
+  objective→func→syntax walkthrough (Claude stops for Sunit's syntax questions per part) → Command Gate.
+- **Next (RESUME HERE):** open **④ SDD Build** of the real `src/`, starting with **ADR-0002** (adopt
+  **Pydantic v2** for the ingestion contract, per WI-1) — the first unit run through the Glass-Box
+  loop. Then notebook functions → tested modules; SQLite → PostgreSQL (WI-5); Postgres MCP module next
+  (WI-9). Finish with **⑤ the Phase 1 build summary**.
+- On resume: greet, then draft ADR-0002 as the first Glass-Box unit. Check `docs/BACKLOG.md` for the
   captured work items (`WI-n`) to fold into the `src/` build.
 
 See [`BUILD_LOG.md`](BUILD_LOG.md) for the full chronology and [`discussion-notes/phase-1-data-storage.md`](discussion-notes/phase-1-data-storage.md)
