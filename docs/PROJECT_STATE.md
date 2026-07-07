@@ -16,7 +16,7 @@ Every module runs: ① Deep Dive (discussion → `primers/`, `discussion-notes/`
 ⑤ Build Summary (`build-summaries/`). Git: branch per phase, conventional commits citing FR-IDs,
 commit/push only when asked. Full detail in [`00_OPERATING_MODEL.md`](00_OPERATING_MODEL.md).
 
-## Where we are right now (2026-06-27)
+## Where we are right now (2026-07-07)
 
 - **Phase 1 — Data & Storage.** Deep dives done: SDD methodology, financial domain. Data architecture
   decided in **[ADR-0001](adr/0001-structured-first-ingestion-and-source-connectors.md)** (structured-first
@@ -25,11 +25,14 @@ commit/push only when asked. Full detail in [`00_OPERATING_MODEL.md`](00_OPERATI
   verified green. They cover: SEC `companyfacts` claims pull → anchored Faker ledger + seeded
   discrepancy → SQLite evidence store + parameterized SQL (injection demo) → the `SourceConnector`
   contract. (SG-1 — seeded-discrepancy detection — works end-to-end in the exercises.)
-- **Next (RESUME HERE — Sunit switching machines):** Sunit has done exercises 01–03 hands-on; he will
-  **attempt Exercise 04 on the other machine**. Then: write the **Phase 1 checkpoint quiz** (not yet
-  authored), then ④ build the real `src/` package (notebook functions → tested modules; SQLite →
-  PostgreSQL), then ⑤ the Phase 1 build summary.
-- On resume: greet, confirm how Exercise 04 went, then offer to write the checkpoint quiz.
+- **Next (RESUME HERE):** All Phase 1 exercises **01–04 are complete hands-on** — the whole data arc
+  (XBRL claims → anchored ledger + seeded discrepancy → SQLite evidence store + parameterized SQL →
+  SourceConnector contract), SG-1 working end-to-end. Next in the loop: **③ write the Phase 1
+  checkpoint quiz** (`learning/quizzes/phase-1-data-storage/`), then **④ build the real `src/`**
+  (notebook functions → tested modules; SQLite → PostgreSQL; adopt **Pydantic v2** per WI-1/ADR-0002),
+  then **⑤ the Phase 1 build summary**.
+- On resume: greet, then offer to write the Phase 1 checkpoint quiz. Check `docs/BACKLOG.md` for the
+  captured work items (`WI-n`) to fold into the `src/` build.
 
 See [`BUILD_LOG.md`](BUILD_LOG.md) for the full chronology and [`discussion-notes/phase-1-data-storage.md`](discussion-notes/phase-1-data-storage.md)
 for the running discussion log.

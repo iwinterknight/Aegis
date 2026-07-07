@@ -123,3 +123,22 @@ Full primer written: `../primers/financial-domain-ma-due-diligence.md`. Salient 
 
 > "GO" given 2026-06-27 → **DONE**: ADR-0001 accepted; spec bumped to v4.4 (FR-IN-1..3 refined,
 > FR-IN-4..5 added, §10.3 rewritten). Next: loop phase ② exercises.
+
+## Exercises 01–04 + retrospection salients (2026-06-30)
+
+- **Exercises 01–04 authored & solution-verified** (SG-1 end-to-end): XBRL claims pull → anchored
+  Faker ledger + seeded discrepancy → SQLite evidence store + parameterized SQL (injection demo) →
+  SourceConnector contract.
+- **Agnostic pull ≠ schemaless.** The envelope (`IngestionResult`) is uniform; the `records` schema is
+  keyed by **`kind`** (claim vs ledger), not by source. A connector's `normalize` is the
+  **anti-corruption layer** mapping source-specific shapes onto a small closed set of canonical kinds.
+  Adding a *source* reuses a kind; adding a *kind* is the real (rare) schema change.
+- **`@register`** = registry pattern via decorator (`X = register(X)`): a connector files itself into
+  `CONNECTORS` at definition time, so `ingest` never changes when a source is added.
+- **DECISION (→ WI-1, ADR-0002 at build):** adopt **Pydantic v2** for the ingestion contract —
+  canonical record models, an `IngestionResult` **discriminated union** on `kind`, per-connector
+  **descriptor** models, validation at the boundary, `Decimal`-as-string. Turns "agnostic by
+  convention" into "agnostic by contract"; JSON-Schema output later feeds MCP tools + LLM structured
+  output. Exercises stayed dict/dataclass to remain stdlib-only.
+- **Process add:** started `docs/BACKLOG.md` — learning/retrospection insights are captured as `WI-n`
+  work items immediately (now binding in the operating model), reviewed at phase boundaries.

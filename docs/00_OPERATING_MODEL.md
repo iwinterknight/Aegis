@@ -59,6 +59,11 @@ We do not start ④ until the developer signals they're clear on ①–③.
   per machine; thereafter every commit auto-includes the SDD files **and** the Claude Code
   conversation thread (`conversations/`). Pull when starting, push before stopping/switching. Full
   detail: `docs/MULTI_MACHINE_SYNC.md`.
+- **Capture to backlog (binding):** any decision, enhancement, follow-up, calibration item, or open
+  question that surfaces during deep dives, exercises, inspection/retrospection, or reviews is logged
+  **immediately** to `docs/BACKLOG.md` as a `WI-n` work item — so learning-phase insights convert into
+  tracked work instead of evaporating. Review the backlog at every phase boundary; promote `DECISION`
+  items to ADRs before their code is written.
 
 ## Repository layout
 
@@ -70,6 +75,7 @@ docs/                     # all prose/document artifacts (see docs/README.md)
   build-summaries/        # top-down module write-ups
   adr/                    # architecture decision records (design changes & why)
   reference/              # external reference material, cheat-sheets, links
+  BACKLOG.md              # captured work items (decisions, follow-ups, calibration, questions)
   BUILD_LOG.md            # chronological build log tied to commits/FR-IDs
   00_OPERATING_MODEL.md   # this file
 learning/                 # hands-on learning artifacts (see learning/README.md)
