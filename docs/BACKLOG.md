@@ -26,5 +26,8 @@ ADR / commit / module that resolved it.
 | WI-9 | 2026-07-07 | MCP deep dive | DECISION | **Sequence the Postgres MCP module right after the Phase 1 `src/` data build** (option A) — self-contained, ledger ready, injection lesson fresh; test with MCP Inspector / a tiny client, no agent graph yet. Reorders spec Module 4 earlier. | Right after Phase 1 ④ | PLANNED |
 | WI-10 | 2026-07-07 | MCP deep dive | ENHANCEMENT | Postgres MCP module to **build all three roles** (host handler + client + server) so the **sampling/elicitation callback path** is felt, not just tool calls; **cover both transports** (stdio first, then a short Streamable HTTP + `Mcp-Session-Id` exercise); plus the tool-as-security-boundary (parameterized / read-only role / query allow-list) from Exercise 03. Primer started: `docs/primers/mcp-architecture.md`. | Postgres MCP module | OPEN |
 
+| WI-11 | 2026-07-07 | Assessment idea | ENHANCEMENT | **Midterm** (~end of Phase 4): longer objective MCQ across all modules so far. Source questions from phase discussion notes **+ Sunit's ongoing external project chat** (his fundamental/conceptual questions). | Project midpoint | OPEN |
+| WI-12 | 2026-07-07 | Assessment idea | ENHANCEMENT | **Final exam** at project end: comprehensive objective MCQ across the whole build, principles-first. | Project end | OPEN |
+
 _Add new items at the bottom with the next `WI-n`. Keep the table the single source of truth for
 "things we said we'd do." Big deferred scope items (WI-7/8) are also noted in the discussion log._

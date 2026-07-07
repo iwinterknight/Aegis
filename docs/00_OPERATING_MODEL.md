@@ -45,6 +45,18 @@ Every technical module runs this loop. Artifacts in **bold**.
 
 We do not start ④ until the developer signals they're clear on ①–③.
 
+## Assessment ladder
+
+Objective, principles-first (never jargon), same MCQ format throughout (`learning/quizzes/README.md`):
+
+- **Checkpoint quiz** — per phase/module (loop step ③), locks that module's fundamentals.
+- **Midterm** — around the project midpoint (~end of Phase 4), a longer MCQ across all modules so far.
+  **Question source:** the phase discussion notes *plus* Sunit's ongoing external project chat, where he
+  asks fundamental/conceptual questions — mined into questions.
+- **Final exam** — at project end, comprehensive MCQ across the whole build.
+
+Each draws crucial points from our discussions, so the assessments recap real learning, not trivia.
+
 ## Git discipline
 
 - **Branch per module/phase:** e.g. `phase-1/data-storage`, `phase-2/inference`.
