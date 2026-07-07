@@ -47,19 +47,48 @@ for the running discussion log.
 ## Environment / setup on a fresh machine
 
 ```bash
-git clone https://github.com/iwinterknight/Aegis.git && cd Aegis
+git clone https://github.com/iwinterknight/Aegis.git && cd Aegis   # (or: git pull, if already cloned)
 sh scripts/setup-sync.sh                              # ONCE per machine: enable thread sync hooks
-python -m venv .venv && . .venv/Scripts/activate      # Windows; use bin/activate on macOS/Linux
-pip install -r learning/exercises/phase-1-data-storage/requirements.txt   # currently just: faker
+
+# --- src/ build dev env (Phase 1 step ④ — what we're in now) ---
+python -m venv .venv && . .venv/bin/activate          # bin/activate on macOS/Linux; .venv\Scripts\activate on Windows
+pip install -r requirements-dev.txt                   # pydantic + pytest (pulls in src/requirements.txt)
+pytest                                                 # sanity check — expect "20 passed" (ClaimRecord tests)
+
+# --- exercise env (only if re-running Phase 1 notebooks 01–04) ---
+pip install -r learning/exercises/phase-1-data-storage/requirements.txt   # faker
 ```
+
+`.venv/` is git-ignored, so **recreate it per machine** (the two steps above). If `python` isn't found,
+use `python3`. If `git push` asks for a password, this repo uses SSH — see the note at the bottom of
+this file.
 
 **Multi-machine:** `git pull` when starting, `git push` before stopping/switching machines. Every
 commit auto-includes the SDD files and the Claude Code thread. See [`MULTI_MACHINE_SYNC.md`](MULTI_MACHINE_SYNC.md).
 Exercise 01 is stdlib-only; 02–04 need Faker. SEC calls need internet (offline fallbacks included).
 
+### To resume Unit 2 (`LedgerRow`) on the other machine
+
+1. `git pull` — get `07359e7` (ADR-0002 + `ClaimRecord` + tests).
+2. Recreate the dev env (the two `.venv` steps above); confirm `pytest` shows **20 passed**.
+3. Tell Claude to **resume**. It will read this file + `CLAUDE.md` (auto-loaded) and start
+   **Unit 2 = `LedgerRow`** at **beat ① (Concept Brief)** of the **Glass-Box Build** loop
+   (Concept Brief → Build Narration → interactive objective→func→syntax walkthrough → Command Gate).
+   Reference model to mirror: `src/aegis/ingestion/models.py`. Open LLD question to raise first:
+   whether `LedgerRow` and `ClaimRecord` should share a provenance base/mixin (DRY) or stay independent.
+4. Then `IngestionResult` (the `kind`-discriminated union) + per-connector descriptors, then the
+   `sec-xbrl` connector. Pull open items from `docs/BACKLOG.md` (esp. **WI-13** bitemporal retention).
+
 - **Compute:** local dev = laptop RTX 3080 Ti (16 GB, Ampere); heavy ML work = Google Colab A100.
 - **Database:** exercises use stdlib `sqlite3` as a Postgres stand-in. Real PostgreSQL is stood up at
   the `src/` build (Phase 1 step ④).
+
+## Note on pushing (SSH)
+
+GitHub disabled password auth for git in 2021, so an HTTPS `git push` that prompts for a
+username/password will fail. Fix per machine (one time): either switch the remote to SSH —
+`git remote set-url origin git@github.com:iwinterknight/Aegis.git` (needs an SSH key added to GitHub) —
+or use a Personal Access Token as the password, or `gh auth login`. This machine is already on SSH.
 
 ## Note on assistant memory
 
