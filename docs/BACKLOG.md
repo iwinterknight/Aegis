@@ -23,6 +23,8 @@ ADR / commit / module that resolved it.
 | WI-6 | 2026-06-27 | P1 ADR-0001 | ENHANCEMENT | **Liveness:** event-driven / CDC ingestion trigger emitting the same descriptors (FR-IN-3), continual live pulls. | Later phase | OPEN |
 | WI-7 | 2026-06-27 | Deep dive (scope) | SCOPE | **IPO forecasting vertical** (bull/bear valuation; S-1; comps/DCF) — reframe vision to a two-vertical platform. | Post-MVP; ADR when adopted | OPEN (deferred) |
 | WI-8 | 2026-06-27 | Deep dive (scope) | SCOPE | **AWS / Bedrock AgentCore** managed-cloud mirror ("Part II"). | Post-MVP capstone | OPEN (deferred) |
+| WI-9 | 2026-07-07 | MCP deep dive | DECISION | **Sequence the Postgres MCP module right after the Phase 1 `src/` data build** (option A) — self-contained, ledger ready, injection lesson fresh; test with MCP Inspector / a tiny client, no agent graph yet. Reorders spec Module 4 earlier. | Right after Phase 1 ④ | PLANNED |
+| WI-10 | 2026-07-07 | MCP deep dive | ENHANCEMENT | Postgres MCP module to **build all three roles** (host handler + client + server) so the **sampling/elicitation callback path** is felt, not just tool calls; **cover both transports** (stdio first, then a short Streamable HTTP + `Mcp-Session-Id` exercise); plus the tool-as-security-boundary (parameterized / read-only role / query allow-list) from Exercise 03. Primer started: `docs/primers/mcp-architecture.md`. | Postgres MCP module | OPEN |
 
 _Add new items at the bottom with the next `WI-n`. Keep the table the single source of truth for
 "things we said we'd do." Big deferred scope items (WI-7/8) are also noted in the discussion log._
