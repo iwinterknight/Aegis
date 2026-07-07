@@ -1,0 +1,4 @@
+# Project Aegis — development/test dependencies (not needed at runtime).
+# Install with:  pip install -r requirements-dev.txt
+-r src/requirements.txt
+pytest>=8

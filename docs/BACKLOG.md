@@ -15,7 +15,7 @@ ADR / commit / module that resolved it.
 
 | ID | Captured | Context | Type | Item | Target | Status |
 |---|---|---|---|---|---|---|
-| WI-1 | 2026-06-30 | P1 ex04 retrospection | DECISION | Adopt **Pydantic v2** for the ingestion contract: canonical record models (`ClaimRecord`, `LedgerRow`), an `IngestionResult` **discriminated union** on `kind`, and per-connector **descriptor** models; validate at the connector boundary; serialize `Decimal` as string. | → **ADR-0002** when `src/` build opens (phase ④) | OPEN |
+| WI-1 | 2026-06-30 | P1 ex04 retrospection | DECISION | Adopt **Pydantic v2** for the ingestion contract: canonical record models (`ClaimRecord`, `LedgerRow`), an `IngestionResult` **discriminated union** on `kind`, and per-connector **descriptor** models; validate at the connector boundary; serialize `Decimal` as string. | → **ADR-0002** when `src/` build opens (phase ④) | **DONE** — [ADR-0002](adr/0002-pydantic-v2-ingestion-contract.md) accepted 2026-07-07 |
 | WI-2 | 2026-06-27 | P1 ADR-0001 follow-up | CALIBRATION | Calibrate **Benford's-Law realism** of synthetic ledger amounts (uniform-random amounts don't match real ledgers). | `src/` ledger generator | OPEN |
 | WI-3 | 2026-06-27 | P1 ADR-0001 follow-up | ENHANCEMENT | Real **FFIEC Call Report** connector (RSSD lookup) beyond the exercise stub — bank-specific evidence. | Holistic data expansion | OPEN |
 | WI-4 | 2026-06-27 | P1 ADR-0001 follow-up | QUESTION | Confirm **XBRL coverage quirks** for bank taxonomies (us-gaap vs ffiec concepts, regulatory line items). | During `src/` ingestion build | OPEN |
@@ -28,6 +28,7 @@ ADR / commit / module that resolved it.
 
 | WI-11 | 2026-07-07 | Assessment idea | ENHANCEMENT | **Midterm** (~end of Phase 4): longer objective MCQ across all modules so far. Source questions from phase discussion notes **+ Sunit's ongoing external project chat** (his fundamental/conceptual questions). | Project midpoint | OPEN |
 | WI-12 | 2026-07-07 | Assessment idea | ENHANCEMENT | **Final exam** at project end: comprehensive objective MCQ across the whole build, principles-first. | Project end | OPEN |
+| WI-13 | 2026-07-07 | Unit-1 ClaimRecord brief | DECISION | **Bitemporal fact retention + selection.** Store is **append-only**: build & persist a `ClaimRecord` for **every** `companyfacts` entry (all restatements kept — facts carry both axes: `period_end` = valid time, `filed`/`accession` = knowledge time). `select_authoritative()` is a **read-time projection** (group by `(concept, unit, period_end)`; prefer the period's own primary form, latest `filed`) in a **separate testable resolver** — never deletes history, keep policy OUT of the value object. **Restatement delta = a potential SG-1 finding.** Supports "as-originally-reported" vs "as-known-today" queries. | `sec-xbrl` connector + evidence store (Phase 1 ④) | OPEN |
 
 _Add new items at the bottom with the next `WI-n`. Keep the table the single source of truth for
 "things we said we'd do." Big deferred scope items (WI-7/8) are also noted in the discussion log._

@@ -1,0 +1,3 @@
+# Project Aegis — src/ runtime dependencies (Phase 1 build).
+# The learning/ exercises stay stdlib-first; these are src/-only.
+pydantic>=2,<3

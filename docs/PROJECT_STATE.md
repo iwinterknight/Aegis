@@ -29,12 +29,17 @@ commit/push only when asked. Full detail in [`00_OPERATING_MODEL.md`](00_OPERATI
 - **Glass-Box Build protocol adopted** (binding, in `00_OPERATING_MODEL.md` + `CLAUDE.md`): step ④ is
   built one *teachable unit* at a time through Concept Brief → Build Narration → **interactive**
   objective→func→syntax walkthrough (Claude stops for Sunit's syntax questions per part) → Command Gate.
-- **Next (RESUME HERE):** open **④ SDD Build** of the real `src/`, starting with **ADR-0002** (adopt
-  **Pydantic v2** for the ingestion contract, per WI-1) — the first unit run through the Glass-Box
-  loop. Then notebook functions → tested modules; SQLite → PostgreSQL (WI-5); Postgres MCP module next
-  (WI-9). Finish with **⑤ the Phase 1 build summary**.
-- On resume: greet, then draft ADR-0002 as the first Glass-Box unit. Check `docs/BACKLOG.md` for the
-  captured work items (`WI-n`) to fold into the `src/` build.
+- **④ SDD Build in progress.** **ADR-0002** accepted (Pydantic v2 ingestion contract, resolves WI-1).
+  **Unit 1 — `ClaimRecord`** built through the full Glass-Box loop and **tested green** (`src/aegis/
+  ingestion/models.py`; `tests/ingestion/test_claim_record.py`, 20 pytest cases). Dev env: `.venv` +
+  `requirements-dev.txt` (pydantic, pytest); `pytest.ini` puts `src/` on the path. WI-13 captured
+  (bitemporal fact retention + restated-fact selection resolver).
+- **Next (RESUME HERE):** **Unit 2 — `LedgerRow`** (the ledger side of SG-1) through the Glass-Box
+  loop — will surface the shared-provenance/DRY question and lead into **`IngestionResult`** (the
+  `kind`-discriminated union) and the per-connector descriptors. Then the `sec-xbrl` connector,
+  SQLite → PostgreSQL (WI-5), Postgres MCP module (WI-9). Finish with **⑤ the Phase 1 build summary**.
+- On resume: greet, then start Unit 2 (`LedgerRow`) at beat ① (Concept Brief). Check `docs/BACKLOG.md`
+  for the captured work items (`WI-n`) to fold into the `src/` build.
 
 See [`BUILD_LOG.md`](BUILD_LOG.md) for the full chronology and [`discussion-notes/phase-1-data-storage.md`](discussion-notes/phase-1-data-storage.md)
 for the running discussion log.
